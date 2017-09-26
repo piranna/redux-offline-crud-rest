@@ -1,0 +1,28 @@
+{
+  "name": "redux-offline-crud-rest",
+  "version": "0.0.0",
+  "description": "Offline-first persistence for React Native web apps backed by CRUD-based operations over REST APIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piranna/redux-offline-crud-rest.git"
+  },
+  "keywords": [
+    "ReactNative",
+    "CRUD",
+    "REST",
+    "redux-offline"
+  ],
+  "author": "Jesús Leganés-Combarro 'piranna' <piranna@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/piranna/redux-offline-crud-rest/issues"
+  },
+  "homepage": "https://github.com/piranna/redux-offline-crud-rest#readme",
+  "dependencies": {
+    "react-native-uuid": "^1.4.9"
+  }
+}
