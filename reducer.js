@@ -1,10 +1,14 @@
 import genActionTypes from './actionTypes'
-import {idStrictEqual} from '../index'
 
 
 function deleteIndex(array, index)
 {
   array.splice(index, 1)
+}
+
+function idStrictEqual(element)
+{
+  return element.id === this.toString()
 }
 
 const defaultOnRollback = console.error.bind(console)
