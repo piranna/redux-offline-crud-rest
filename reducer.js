@@ -78,17 +78,23 @@ function reducer(basePath, options={})
         return state
 
 
-      // Update
+      // Update & Patch
 
       case actionTypes.update:
         result[index] = {...payload, _rollback: item}
       break
 
+      case actionTypes.patch:
+        result[index] = {...item, ...payload, _rollback: item}
+      break
+
       case actionTypes.update_commit:
+      case actionTypes.patch_commit:
         result[index] = {...item, _rollback: undefined}
       break
 
       case actionTypes.update_rollback:
+      case actionTypes.patch_rollback:
         onRollback(payload)
 
         result[index] = {...item._rollback}

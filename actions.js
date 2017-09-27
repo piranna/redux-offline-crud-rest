@@ -87,6 +87,29 @@ function actions(basePath, options={})
       }
     },
 
+    patch(id, body)
+    {
+      return {
+        type: actionTypes.patch,
+        payload: body,
+        meta:
+        {
+          id,
+          offline:
+          {
+            effect: {
+              url: `${baseUrl}/${basePath}/${id}`,
+              method: 'PATCH',
+              body,
+              headers
+            },
+            commit: {type: actionTypes.patch_commit, meta: {id}},
+            rollback: {type: actionTypes.patch_rollback, meta: {id}}
+          }
+        }
+      }
+    },
+
     delete(id)
     {
       return {
