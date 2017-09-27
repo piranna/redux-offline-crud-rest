@@ -57,6 +57,27 @@ function reducer(basePath, options={})
       break
 
 
+      // Read
+
+      case actionTypes.read:
+        console.info(actionTypes.read)
+
+        return state
+
+      case actionTypes.read_commit:
+        if(id)  // Resource
+          result[index] = {...payload}
+
+        else  // Collection
+          result = [...payload]
+      break
+
+      case actionTypes.read_rollback:
+        onRollback(payload)
+
+        return state
+
+
       // Update
 
       case actionTypes.update:
