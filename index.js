@@ -1,6 +1,8 @@
-const actions = require('./actions')
-const reducer = require('./reducer')
+const actions    = require('./actions')
+const namespaces = require('./namespaces')
+const reducer    = require('./reducer')
 
 
-exports.actions = actions
-exports.reducer = reducer
+exports.actions    = actions
+exports.namespaces = namespaces
+exports.reducer    = reducer
