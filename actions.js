@@ -54,7 +54,7 @@ function actions(basePath, options={})
             effect: {
               url: `${baseUrl}/${basePath}/${idPath}`,
               method: 'GET',
-              headers: {authorization}
+              headers
             },
             commit: {type: actionTypes.read_commit, meta: {id}},
             rollback: {type: actionTypes.read_rollback, meta: {id}}
