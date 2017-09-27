@@ -65,7 +65,7 @@ function reducer(basePath, options={})
         return state
 
       case actionTypes.read_commit:
-        if(id)  // Resource
+        if(id != null)  // Resource
           result[index] = {...payload}
 
         else  // Collection

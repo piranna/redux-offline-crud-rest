@@ -42,40 +42,22 @@ function actions(basePath, options={})
 
     read(id)
     {
-      if(id)
-        // Resource
-        return {
-          type: actionTypes.read,
-          meta:
-          {
-            id,
-            offline:
-            {
-              effect: {
-                url: `${baseUrl}/${basePath}/${id}`,
-                method: 'GET',
-                headers: {authorization}
-              },
-              commit: {type: actionTypes.read_commit, meta: {id}},
-              rollback: {type: actionTypes.read_rollback, meta: {id}}
-            }
-          }
-        }
+      const idPath = (id != null) ? id : ''
 
-      // Collection
       return {
         type: actionTypes.read,
         meta:
         {
+          id,
           offline:
           {
             effect: {
-              url: `${baseUrl}/${basePath}/`,
+              url: `${baseUrl}/${basePath}/${idPath}`,
               method: 'GET',
               headers: {authorization}
             },
-            commit: {type: actionTypes.read_commit},
-            rollback: {type: actionTypes.read_rollback}
+            commit: {type: actionTypes.read_commit, meta: {id}},
+            rollback: {type: actionTypes.read_rollback, meta: {id}}
           }
         }
       }
