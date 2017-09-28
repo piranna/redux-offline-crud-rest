@@ -65,11 +65,17 @@ function reducer(basePath, options={})
         return state
 
       case actionTypes.read_commit:
-        if(id != null)  // Resource
-          result[index] = {...payload}
-
-        else  // Collection
+        // Collection
+        if(id == null)
           result = [...payload]
+
+        // Non-existing resource
+        else if(index == -1)
+          result.push({...payload})
+
+        // Existing resource
+        else
+          result[index] = {...payload}
       break
 
       case actionTypes.read_rollback:
