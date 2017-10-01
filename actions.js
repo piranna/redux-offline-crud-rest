@@ -8,6 +8,11 @@ function reduceActions(acum, {key, func})
   return {...acum, [key]: (...args) => this(func(...args))}
 }
 
+function reduceNamespaces(acum, name)
+{
+  return {...acum, [name]: actions(name, this)}
+}
+
 
 function actions(basePath, options={})
 {
@@ -145,5 +150,11 @@ function actions(basePath, options={})
   return result.entries().reduce(reduceActions.bind(dispatch), {})
 }
 
+function namespaces(namespaces, options)
+{
+  return namespaces.reduce(reduceNamespaces.bind(options), {})
+}
 
-module.exports = actions
+
+export default actions
+export {namespaces}
