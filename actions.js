@@ -3,9 +3,15 @@ import uuid from 'react-native-uuid'
 import genActionTypes from './actionTypes'
 
 
+function reduceActions(acum, {key, func})
+{
+  return {...acum, [key]: (...args) => this(func(...args))}
+}
+
+
 function actions(basePath, options={})
 {
-  const headers = options.headers
+  const {dispatch, headers} = options
 
   let baseUrl = options.baseUrl || ''
   if(baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, baseUrl.length-1)
@@ -13,7 +19,8 @@ function actions(basePath, options={})
   const baseType = basePath.slice(0, basePath.length-1).toUpperCase()
   const actionTypes = genActionTypes(baseType)
 
-  return {
+  const result =
+  {
     create(body)
     {
       const id = `tmp_id:${uuid.v4()}`
@@ -132,6 +139,10 @@ function actions(basePath, options={})
       }
     }
   }
+
+  if(!dispatch) return result
+
+  return result.entries().reduce(reduceActions.bind(dispatch), {})
 }
 
 
