@@ -36,10 +36,10 @@ function reducer(basePath, options={})
     let index
     let item
 
+    const {func, id} = (meta || {})
+
     if(meta)
     {
-      const {func, id} = meta
-
       if(func)
       {
         if(type.endsWith('commit'))

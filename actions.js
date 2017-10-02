@@ -3,38 +3,9 @@ import uuid from 'react-native-uuid'
 import genActionTypes from './actionTypes'
 
 
-function reduceActions(acum, {key, func})
+function reduceActions(acum, [key, func])
 {
   return {...acum, [key]: (...args) => this(func(...args))}
-}
-
-function reduceMethods(acum, {name, func)
-{
-  const actionType = `${baseType}#${name}`
-
-  return {...acum, [name]: function(id, body)
-  {
-    const meta = {func, id}
-
-    return {
-      type: actionType,
-      meta:
-      {
-        offline:
-        {
-          effect:
-          {
-            url: `${baseUrl}/${basePath}/${id}/${name}`,
-            method: 'POST',
-            body,
-            headers
-          },
-          commit: {type: `${actionType}_commit`, meta},
-          rollback: {type: `${actionType}_rollback`, meta}
-        }
-      }
-    }
-  }}
 }
 
 function reduceNamespaces(acum, name)
@@ -53,7 +24,36 @@ function actions(basePath, options={})
   const baseType = basePath.slice(0, basePath.length-1).toUpperCase()
   const actionTypes = genActionTypes(baseType)
 
-  const result =
+  function reduceMethods(acum, [name, func])
+  {
+    const actionType = `${baseType}#${name}`
+
+    return {...acum, [name]: function(id, body)
+    {
+      const meta = {func, id}
+
+      return {
+        type: actionType,
+        meta:
+        {
+          offline:
+          {
+            effect:
+            {
+              url: `${baseUrl}/${basePath}/${id}/${name}`,
+              method: 'POST',
+              body,
+              headers
+            },
+            commit: {type: `${actionType}_commit`, meta},
+            rollback: {type: `${actionType}_rollback`, meta}
+          }
+        }
+      }
+    }}
+  }
+
+  let result =
   {
     create(body)
     {
@@ -175,11 +175,11 @@ function actions(basePath, options={})
   }
 
   if(resourceMethods)
-    result = resourceMethods.entries().reduce(reduceMethods, result)
+    result = Object.entries(resourceMethods).reduce(reduceMethods, result)
 
   if(!dispatch) return result
 
-  return result.entries().reduce(reduceActions.bind(dispatch), {})
+  return Object.entries(result).reduce(reduceActions.bind(dispatch), {})
 }
 
 function namespaces(namespaces, options)
