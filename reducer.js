@@ -11,6 +11,11 @@ function idStrictEqual(element)
   return element.id === this.toString()
 }
 
+function reduceNamespaces(acum, name)
+{
+  return {...acum, [name]: reducer(name, this)}
+}
+
 const defaultOnRollback = console.error.bind(console)
 
 
@@ -162,5 +167,11 @@ function reducer(basePath, options={})
   }
 }
 
+function namespaces(namespaces, options)
+{
+  return namespaces.reduce(reduceNamespaces.bind(options), {})
+}
 
-module.exports = reducer
+
+export default reducer
+export {namespaces}
