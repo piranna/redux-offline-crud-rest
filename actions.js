@@ -8,6 +8,35 @@ function reduceActions(acum, {key, func})
   return {...acum, [key]: (...args) => this(func(...args))}
 }
 
+function reduceMethods(acum, {name, func)
+{
+  const actionType = `${baseType}#${name}`
+
+  return {...acum, [name]: function(id, body)
+  {
+    const meta = {func, id}
+
+    return {
+      type: actionType,
+      meta:
+      {
+        offline:
+        {
+          effect:
+          {
+            url: `${baseUrl}/${basePath}/${id}/${name}`,
+            method: 'POST',
+            body,
+            headers
+          },
+          commit: {type: `${actionType}_commit`, meta},
+          rollback: {type: `${actionType}_rollback`, meta}
+        }
+      }
+    }
+  }}
+}
+
 function reduceNamespaces(acum, name)
 {
   return {...acum, [name]: actions(name, this)}
@@ -16,7 +45,7 @@ function reduceNamespaces(acum, name)
 
 function actions(basePath, options={})
 {
-  const {dispatch, headers} = options
+  const {dispatch, headers, resourceMethods} = options
 
   let baseUrl = options.baseUrl || ''
   if(baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, baseUrl.length-1)
@@ -144,6 +173,9 @@ function actions(basePath, options={})
       }
     }
   }
+
+  if(resourceMethods)
+    result = resourceMethods.entries().reduce(reduceMethods, result)
 
   if(!dispatch) return result
 

@@ -31,11 +31,25 @@ function reducer(basePath, options={})
     let index
     let item
 
-    const id = meta && meta.id
-    if(id)
+    if(meta)
     {
-      index = result.findIndex(idStrictEqual, id)
-      item = result[index]
+      const {func, id} = meta
+
+      if(func)
+      {
+        if(type.endsWith('commit'))
+          func(null, payload)
+        else
+          func(payload)
+
+        return state
+      }
+
+      if(id)
+      {
+        index = result.findIndex(idStrictEqual, id)
+        item = result[index]
+      }
     }
 
     switch(type)
