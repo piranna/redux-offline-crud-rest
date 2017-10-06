@@ -8,7 +8,9 @@ function deleteIndex(array, index)
 
 function idStrictEqual(element)
 {
-  return element.id === this.toString()
+  const {id, uid} = element  // TODO deprecate `uid`
+
+  return (id || uid) === this.toString()
 }
 
 function reduceNamespaces(acum, name)
