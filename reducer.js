@@ -1,4 +1,4 @@
-import genActionTypes from './actionTypes'
+const genActionTypes = require('./actionTypes')
 
 
 function deleteIndex(array, index)

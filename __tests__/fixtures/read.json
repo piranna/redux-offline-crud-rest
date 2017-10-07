@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "offline": {
+      "commit": {
+        "type": "PAT#READ_COMMIT"
+      },
+      "effect": {
+        "method": "GET",
+        "url": "/path/"
+      },
+      "rollback": {
+        "type": "PAT#READ_ROLLBACK"
+      }
+    }
+  },
+  "type": "PAT#READ"
+}

@@ -1,6 +1,6 @@
-import uuid from 'react-native-uuid'
+const uuid = require('react-native-uuid')
 
-import genActionTypes from './actionTypes'
+const genActionTypes = require('./actionTypes')
 
 
 function reduceActions(acum, [key, func])
@@ -186,4 +186,4 @@ function actions(basePath, options={})
 }
 
 
-export default actions
+module.exports = actions
