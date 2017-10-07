@@ -23,6 +23,9 @@ const defaultOnRollback = console.error.bind(console)
 
 function reducer(basePath, options={})
 {
+  if(Array.isArray(basePath))
+    return basePath.reduce(reduceNamespaces.bind(options), {})
+
   const childReducer = options.childReducer
   const onRollback   = options.onRollback || defaultOnRollback
 
@@ -169,11 +172,5 @@ function reducer(basePath, options={})
   }
 }
 
-function namespaces(namespaces, options)
-{
-  return namespaces.reduce(reduceNamespaces.bind(options), {})
-}
-
 
 export default reducer
-export {namespaces}

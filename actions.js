@@ -16,6 +16,9 @@ function reduceNamespaces(acum, name)
 
 function actions(basePath, options={})
 {
+  if(Array.isArray(basePath))
+    return basePath.reduce(reduceNamespaces.bind(options), {})
+
   const {dispatch, headers, resourceMethods} = options
 
   let baseUrl = options.baseUrl || ''
@@ -182,11 +185,5 @@ function actions(basePath, options={})
   return Object.entries(result).reduce(reduceActions.bind(dispatch), {})
 }
 
-function namespaces(namespaces, options)
-{
-  return namespaces.reduce(reduceNamespaces.bind(options), {})
-}
-
 
 export default actions
-export {namespaces}
