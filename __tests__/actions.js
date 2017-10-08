@@ -5,12 +5,15 @@ test('basic', function()
 {
   const create = require('./fixtures/create.json')
   const read = require('./fixtures/read.json')
+  const update = require('./fixtures/update.json')
+  const patch = require('./fixtures/patch.json')
+  const del = require('./fixtures/delete.json')
 
   const result = actions('path')
 
   expect(result.create()).toMatchObject(create)
   expect(result.read()).toMatchObject(read)
-  // expect(result.update()).toEqual(expected)
-  // expect(result.patch()).toEqual(expected)
-  // expect(result.delete()).toEqual(expected)
+  expect(result.update()).toMatchObject(update)
+  expect(result.patch()).toMatchObject(patch)
+  expect(result.delete()).toMatchObject(del)
 })

@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "offline": {
+      "commit": {
+        "type": "PAT#PATCH_COMMIT"
+      },
+      "effect": {
+        "method": "PATCH",
+        "url": "/path/undefined"
+      },
+      "rollback": {
+        "type": "PAT#PATCH_ROLLBACK"
+      }
+    }
+  },
+  "type": "PAT#PATCH"
+}
