@@ -17,3 +17,20 @@ test('basic', function()
   expect(result.patch()).toMatchObject(patch)
   expect(result.delete()).toMatchObject(del)
 })
+
+test('methods', function()
+{
+  const foo = require('./fixtures/foo.json')
+
+  const options =
+  {
+    resourceMethods:
+    {
+      foo(){}
+    }
+  }
+
+  const result = actions('path', options)
+
+  expect(result.foo()).toMatchObject(foo)
+})

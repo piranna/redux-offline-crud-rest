@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "offline": {
+      "commit": {
+        "type": "PAT#foo_commit"
+      },
+      "effect": {
+        "method": "POST",
+        "url": "/path/undefined/foo"
+      },
+      "rollback": {
+        "type": "PAT#foo_rollback"
+      }
+    }
+  },
+  "type": "PAT#foo"
+}
