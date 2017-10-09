@@ -26,16 +26,17 @@ function reducer(basePath, options={})
   if(Array.isArray(basePath))
     return basePath.reduce(reduceNamespaces.bind(options), {})
 
+  if(basePath.endsWith('/')) basePath = basePath.slice(0, basePath.length-1)
+
   const childReducer = options.childReducer
   const onRollback   = options.onRollback || defaultOnRollback
 
-  const baseType = basePath.slice(0, basePath.length-1).toUpperCase()
-  const actionTypes = genActionTypes(baseType)
+  const actionTypes = genActionTypes(basePath)
 
   return function(state = [], action)
   {
     const {meta, payload, type} = action
-    if(!type.startsWith(baseType)) return state
+    if(!type.startsWith(basePath)) return state
 
     let result = [...state]
     let index
@@ -66,15 +67,15 @@ function reducer(basePath, options={})
     {
       // Add
 
-      case actionTypes.add:
+      case actionTypes.create:
         result.push({...payload})
       break
 
-      case actionTypes.add_commit:
+      case actionTypes.create_commit:
         result[index] = {...item, id: payload}
       break
 
-      case actionTypes.add_rollback:
+      case actionTypes.create_rollback:
         onRollback(payload)
 
         deleteIndex(result, index)

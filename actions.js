@@ -29,17 +29,18 @@ function actions(basePath, options={})
   if(Array.isArray(basePath))
     return basePath.reduce(reduceNamespaces.bind(options), {})
 
+  if(basePath.endsWith('/')) basePath = basePath.slice(0, basePath.length-1)
+
   const {dispatch, headers, resourceMethods} = options
 
   let baseUrl = options.baseUrl || ''
   if(baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, baseUrl.length-1)
 
-  const baseType = basePath.slice(0, basePath.length-1).toUpperCase()
-  const actionTypes = genActionTypes(baseType)
+  const actionTypes = genActionTypes(basePath)
 
   function reduceMethods(acum, [name, func])
   {
-    const actionType = `${baseType}#${name}`
+    const actionType = `${basePath}#${name}`
 
     return {...acum, [name]: function(id, body)
     {
@@ -73,7 +74,7 @@ function actions(basePath, options={})
       const id = `tmp_id:${uuid.v4()}`
 
       return {
-        type: actionTypes.add,
+        type: actionTypes.create,
         payload: body,
         meta:
         {
@@ -87,8 +88,8 @@ function actions(basePath, options={})
               body,
               headers
             },
-            commit: {type: actionTypes.add_commit, meta: {id}},
-            rollback: {type: actionTypes.add_rollback, meta: {id}}
+            commit: {type: actionTypes.create_commit, meta: {id}},
+            rollback: {type: actionTypes.create_rollback, meta: {id}}
           }
         }
       }

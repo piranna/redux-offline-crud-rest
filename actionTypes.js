@@ -1,31 +1,31 @@
 function genActionTypes(baseType)
 {
-  const actionType_add    = `${baseType}#ADD`
-  const actionType_read   = `${baseType}#READ`
-  const actionType_update = `${baseType}#UPDATE`
-  const actionType_patch  = `${baseType}#PATCH`
-  const actionType_delete = `${baseType}#DELETE`
+  const actionType_create = `${baseType}#create`
+  const actionType_read   = `${baseType}#read`
+  const actionType_update = `${baseType}#update`
+  const actionType_patch  = `${baseType}#patch`
+  const actionType_delete = `${baseType}#delete`
 
   return {
-    add         : actionType_add,
-    add_commit  : `${actionType_add}_COMMIT`,
-    add_rollback: `${actionType_add}_ROLLBACK`,
+    create         : actionType_create,
+    create_commit  : `${actionType_create}_commit`,
+    create_rollback: `${actionType_create}_rollback`,
 
     read         : actionType_read,
-    read_commit  : `${actionType_read}_COMMIT`,
-    read_rollback: `${actionType_read}_ROLLBACK`,
+    read_commit  : `${actionType_read}_commit`,
+    read_rollback: `${actionType_read}_rollback`,
 
     update         : actionType_update,
-    update_commit  : `${actionType_update}_COMMIT`,
-    update_rollback: `${actionType_update}_ROLLBACK`,
+    update_commit  : `${actionType_update}_commit`,
+    update_rollback: `${actionType_update}_rollback`,
 
     patch         : actionType_patch,
-    patch_commit  : `${actionType_patch}_COMMIT`,
-    patch_rollback: `${actionType_patch}_ROLLBACK`,
+    patch_commit  : `${actionType_patch}_commit`,
+    patch_rollback: `${actionType_patch}_rollback`,
 
     delete         : actionType_delete,
-    delete_commit  : `${actionType_delete}_COMMIT`,
-    delete_rollback: `${actionType_delete}_ROLLBACK`
+    delete_commit  : `${actionType_delete}_commit`,
+    delete_rollback: `${actionType_delete}_rollback`
   }
 }
 

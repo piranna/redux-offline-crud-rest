@@ -2,16 +2,16 @@
   "meta": {
     "offline": {
       "commit": {
-        "type": "PAT#DELETE_COMMIT"
+        "type": "path#delete_commit"
       },
       "effect": {
         "method": "DELETE",
         "url": "/path"
       },
       "rollback": {
-        "type": "PAT#DELETE_ROLLBACK"
+        "type": "path#delete_rollback"
       }
     }
   },
-  "type": "PAT#DELETE"
+  "type": "path#delete"
 }

@@ -2,16 +2,16 @@
   "meta": {
     "offline": {
       "commit": {
-        "type": "PAT#PATCH_COMMIT"
+        "type": "path#patch_commit"
       },
       "effect": {
         "method": "PATCH",
         "url": "/path"
       },
       "rollback": {
-        "type": "PAT#PATCH_ROLLBACK"
+        "type": "path#patch_rollback"
       }
     }
   },
-  "type": "PAT#PATCH"
+  "type": "path#patch"
 }

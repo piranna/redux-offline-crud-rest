@@ -2,16 +2,16 @@
   "meta": {
     "offline": {
       "commit": {
-        "type": "PAT#ADD_COMMIT"
+        "type": "path#create_commit"
       },
       "effect": {
         "method": "POST",
         "url": "/path"
       },
       "rollback": {
-        "type": "PAT#ADD_ROLLBACK"
+        "type": "path#create_rollback"
       }
     }
   },
-  "type": "PAT#ADD"
+  "type": "path#create"
 }

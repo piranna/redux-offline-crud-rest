@@ -2,16 +2,16 @@
   "meta": {
     "offline": {
       "commit": {
-        "type": "PAT#UPDATE_COMMIT"
+        "type": "path#update_commit"
       },
       "effect": {
         "method": "PUT",
         "url": "/path"
       },
       "rollback": {
-        "type": "PAT#UPDATE_ROLLBACK"
+        "type": "path#update_rollback"
       }
     }
   },
-  "type": "PAT#UPDATE"
+  "type": "path#update"
 }
