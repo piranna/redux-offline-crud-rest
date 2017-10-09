@@ -6,7 +6,7 @@
       },
       "effect": {
         "method": "GET",
-        "url": "/path/"
+        "url": "/path"
       },
       "rollback": {
         "type": "PAT#READ_ROLLBACK"

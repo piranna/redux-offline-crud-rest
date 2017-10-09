@@ -6,7 +6,7 @@
       },
       "effect": {
         "method": "DELETE",
-        "url": "/path/undefined"
+        "url": "/path"
       },
       "rollback": {
         "type": "PAT#DELETE_ROLLBACK"

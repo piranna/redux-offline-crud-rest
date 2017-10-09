@@ -6,7 +6,7 @@
       },
       "effect": {
         "method": "POST",
-        "url": "/path/undefined/foo"
+        "url": "/path/foo"
       },
       "rollback": {
         "type": "PAT#foo_rollback"

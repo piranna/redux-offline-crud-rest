@@ -3,6 +3,16 @@ const uuid = require('react-native-uuid')
 const genActionTypes = require('./actionTypes')
 
 
+function composeUrl(...args)
+{
+  return args.filter(filterComposeUrl).join('/')
+}
+
+function filterComposeUrl(item)
+{
+  return item != null
+}
+
 function reduceActions(acum, [key, func])
 {
   return {...acum, [key]: (...args) => this(func(...args))}
@@ -43,7 +53,7 @@ function actions(basePath, options={})
           {
             effect:
             {
-              url: `${baseUrl}/${basePath}/${id}/${name}`,
+              url: composeUrl(baseUrl, basePath, id, name),
               method: 'POST',
               body,
               headers
@@ -72,7 +82,7 @@ function actions(basePath, options={})
           {
             effect:
             {
-              url: `${baseUrl}/${basePath}`,
+              url: composeUrl(baseUrl, basePath),
               method: 'POST',
               body,
               headers
@@ -86,8 +96,6 @@ function actions(basePath, options={})
 
     read(id)
     {
-      const idPath = (id != null) ? id : ''
-
       return {
         type: actionTypes.read,
         meta:
@@ -96,7 +104,7 @@ function actions(basePath, options={})
           offline:
           {
             effect: {
-              url: `${baseUrl}/${basePath}/${idPath}`,
+              url: composeUrl(baseUrl, basePath, id),
               method: 'GET',
               headers
             },
@@ -119,7 +127,7 @@ function actions(basePath, options={})
           {
             effect:
             {
-              url: `${baseUrl}/${basePath}/${id}`,
+              url: composeUrl(baseUrl, basePath, id),
               method: 'PUT',
               body,
               headers
@@ -142,7 +150,7 @@ function actions(basePath, options={})
           offline:
           {
             effect: {
-              url: `${baseUrl}/${basePath}/${id}`,
+              url: composeUrl(baseUrl, basePath, id),
               method: 'PATCH',
               body,
               headers
@@ -165,7 +173,7 @@ function actions(basePath, options={})
           {
             effect:
             {
-              url: `${baseUrl}/${basePath}/${id}`,
+              url: composeUrl(baseUrl, basePath, id),
               method: 'DELETE',
               headers
             },

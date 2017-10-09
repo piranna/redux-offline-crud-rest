@@ -6,7 +6,7 @@
       },
       "effect": {
         "method": "PUT",
-        "url": "/path/undefined"
+        "url": "/path"
       },
       "rollback": {
         "type": "PAT#UPDATE_ROLLBACK"

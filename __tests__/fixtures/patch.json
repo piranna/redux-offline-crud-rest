@@ -6,7 +6,7 @@
       },
       "effect": {
         "method": "PATCH",
-        "url": "/path/undefined"
+        "url": "/path"
       },
       "rollback": {
         "type": "PAT#PATCH_ROLLBACK"
