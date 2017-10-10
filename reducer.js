@@ -39,7 +39,7 @@ function reducer(basePath, options={})
     if(!type.startsWith(basePath)) return state
 
     let result = [...state]
-    let index
+    let index = -1
     let item
 
     const {func, id} = (meta || {})
@@ -65,7 +65,7 @@ function reducer(basePath, options={})
 
     switch(type)
     {
-      // Add
+      // Create
 
       case actionTypes.create:
         result.push({...payload})
@@ -91,7 +91,7 @@ function reducer(basePath, options={})
 
       case actionTypes.read_commit:
         // Collection
-        if(id == null)
+        if(Array.isArray(payload))
           result = [...payload]
 
         // Non-existing resource
@@ -174,4 +174,4 @@ function reducer(basePath, options={})
 }
 
 
-export default reducer
+module.exports = reducer
