@@ -44,3 +44,20 @@ test('methods', function()
 
   expect(result.foo()).toMatchObject(foo)
 })
+
+test('namespaces', function()
+{
+  const result = actions(['bar', 'foo'])
+
+  expect(result.bar.create).toBeInstanceOf(Function)
+  expect(result.bar.read  ).toBeInstanceOf(Function)
+  expect(result.bar.update).toBeInstanceOf(Function)
+  expect(result.bar.patch ).toBeInstanceOf(Function)
+  expect(result.bar.delete).toBeInstanceOf(Function)
+
+  expect(result.foo.create).toBeInstanceOf(Function)
+  expect(result.foo.read  ).toBeInstanceOf(Function)
+  expect(result.foo.update).toBeInstanceOf(Function)
+  expect(result.foo.patch ).toBeInstanceOf(Function)
+  expect(result.foo.delete).toBeInstanceOf(Function)
+})
