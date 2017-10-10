@@ -18,6 +18,16 @@ test('basic', function()
   expect(result.delete()).toMatchObject(del)
 })
 
+test('dispatch', function()
+{
+  const create = require('./fixtures/create.json')
+
+  actions('path', {dispatch(action)
+  {
+    expect(action).toMatchObject(create)
+  }}).create()
+})
+
 test('methods', function()
 {
   const foo = require('./fixtures/foo.json')
