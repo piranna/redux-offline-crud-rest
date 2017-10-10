@@ -61,3 +61,10 @@ test('namespaces', function()
   expect(result.foo.patch ).toBeInstanceOf(Function)
   expect(result.foo.delete).toBeInstanceOf(Function)
 })
+
+test('url endings', function()
+{
+  const result = actions('path/', {baseUrl: 'http://example/'})
+
+  expect(result.create().meta.offline.effect.url).toBe('http://example/path')
+})
