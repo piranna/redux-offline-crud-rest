@@ -49,9 +49,9 @@ function reducer(basePath, options={})
       if(func)
       {
         if(type.endsWith('commit'))
-          func(null, payload)
+          setImmediate(func, null, payload)
         else
-          func(payload)
+          setImmediate(func, payload)
 
         return state
       }
