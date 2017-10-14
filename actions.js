@@ -13,9 +13,19 @@ function filterComposeUrl(item)
   return item != null
 }
 
+function filterMethods([name, func])
+{
+  return name !== 'dispatch' && func instanceof Function
+}
+
 function reduceActions(acum, [key, func])
 {
   return {...acum, [key]: (...args) => this(func(...args))}
+}
+
+function reduceFilteredMethods(acum, [key, func])
+{
+  return {...acum, [key]: func}
 }
 
 function reduceNamespaces(acum, name)
@@ -39,7 +49,7 @@ function actions(basePath, options={})
 
   if(basePath.endsWith('/')) basePath = basePath.slice(0, basePath.length-1)
 
-  const {dispatch, headers, resourceMethods} = options
+  const {dispatch, headers} = options
 
   let baseUrl = options.baseUrl || ''
   if(baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, baseUrl.length-1)
@@ -194,8 +204,12 @@ function actions(basePath, options={})
     }
   }
 
-  if(resourceMethods)
-    result = Object.entries(resourceMethods).reduce(reduceMethods, result)
+  let {resourceMethods} = options
+  if(!resourceMethods)
+    resourceMethods = Object.entries(options).filter(filterMethods)
+    .reduce(reduceFilteredMethods, {})
+
+  result = Object.entries(resourceMethods).reduce(reduceMethods, result)
 
   if(!dispatch) return result
 

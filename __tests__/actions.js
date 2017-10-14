@@ -28,21 +28,38 @@ test('dispatch', function()
   }}).create()
 })
 
-test('methods', function()
+describe('resource methods', function()
 {
-  const foo = require('./fixtures/foo.json')
-
-  const options =
+  test('implicit', function()
   {
-    resourceMethods:
+    const foo = require('./fixtures/foo.json')
+
+    const options =
     {
       foo(){}
     }
-  }
 
-  const result = actions('path', options)
+    const result = actions('path', options)
 
-  expect(result.foo()).toMatchObject(foo)
+    expect(result.foo()).toMatchObject(foo)
+  })
+
+  test('explicit', function()
+  {
+    const foo = require('./fixtures/foo.json')
+
+    const options =
+    {
+      resourceMethods:
+      {
+        foo(){}
+      }
+    }
+
+    const result = actions('path', options)
+
+    expect(result.foo()).toMatchObject(foo)
+  })
 })
 
 describe('namespaces', function()
