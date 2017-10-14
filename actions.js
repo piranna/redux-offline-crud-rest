@@ -23,11 +23,21 @@ function reduceNamespaces(acum, name)
   return {...acum, [name]: actions(name, this)}
 }
 
+function reduceNamespacesObject(acum, [name, options])
+{
+  if(options === true) options = {}
+
+  return reduceNamespaces.call({...this, ...options}, acum, name)
+}
+
 
 function actions(basePath, options={})
 {
   if(Array.isArray(basePath))
     return basePath.reduce(reduceNamespaces.bind(options), {})
+
+  if(typeof basePath !== 'string')
+    return Object.entries(basePath).reduce(reduceNamespacesObject.bind(options), {})
 
   if(basePath.endsWith('/')) basePath = basePath.slice(0, basePath.length-1)
 
