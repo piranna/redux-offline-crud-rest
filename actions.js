@@ -172,7 +172,7 @@ function actions(basePath, options={})
               url: composeUrl(baseUrl, basePath, id),
               method: 'PATCH',
               body,
-              headers
+              headers: {...headers, 'content-type': 'merge-patch+json'}
             },
             commit: {type: actionTypes.patch_commit, meta: {id}},
             rollback: {type: actionTypes.patch_rollback, meta: {id}}

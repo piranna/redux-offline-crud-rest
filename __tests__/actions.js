@@ -1,21 +1,30 @@
 const actions = require('../actions')
 
 
-test('basic', function()
+describe('basic', function()
 {
-  const create = require('./fixtures/create.json')
-  const read = require('./fixtures/read.json')
-  const update = require('./fixtures/update.json')
-  const patch = require('./fixtures/patch.json')
-  const del = require('./fixtures/delete.json')
+  test('basic', function()
+  {
+    const create = require('./fixtures/create.json')
+    const read = require('./fixtures/read.json')
+    const update = require('./fixtures/update.json')
+    const del = require('./fixtures/delete.json')
 
-  const result = actions('path')
+    const result = actions('path')
 
-  expect(result.create()).toMatchObject(create)
-  expect(result.read()).toMatchObject(read)
-  expect(result.update()).toMatchObject(update)
-  expect(result.patch()).toMatchObject(patch)
-  expect(result.delete()).toMatchObject(del)
+    expect(result.create()).toMatchObject(create)
+    expect(result.read()).toMatchObject(read)
+    expect(result.update()).toMatchObject(update)
+    expect(result.delete()).toMatchObject(del)
+  })
+
+  test('patch', function()
+  {
+    const result = actions('path').patch()
+
+    expect(result).toMatchObject(require('./fixtures/patch.json'))
+    expect(result.meta.offline.effect.headers['content-type']).toBe('merge-patch+json')
+  })
 })
 
 test('dispatch', function()
