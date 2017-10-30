@@ -122,4 +122,4 @@ actionTypes.update_commit  // => 'path/resource#update_commit'
 
 ## Sponsors
 
-[![Quantum BA](http://www.quantum-ba.com/imagenes/logo-quantum.jpg)](http://www.quantum-ba.com)
+[![Quantum BA](quantum-ba.png)](http://www.quantum-ba.com)
