@@ -35,6 +35,8 @@ function reduceNamespaces(acum, name)
 
 function reduceNamespacesObject(acum, [name, options])
 {
+  if(typeof options !== 'object') options = {options}
+
   return reduceNamespaces.call({...this, ...options}, acum, name)
 }
 
