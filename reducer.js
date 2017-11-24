@@ -68,7 +68,7 @@ function reducer(basePath, options={})
       // Create
 
       case actionTypes.create:
-        result.push({...payload})
+        result.push({...payload, id})
       break
 
       case actionTypes.create_commit:
